@@ -73,8 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                 TextButton(
                   child: const Text('Sign Up'),
                   onPressed: () {
-                    _usernameController.clear();
-                    _passwordController.clear();
+                   Navigator.pushNamed(context,'/second');
                   },
                 ),
                 // TODO: Add an elevation to NEXT (103)
