@@ -22,8 +22,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Return an AsymmetricView (104)
-    // TODO: Pass Category variable to AsymmetricView (104)
+
     return const Scaffold(
       // TODO: Add app bar (102)
       // TODO: Add a grid view (102)
