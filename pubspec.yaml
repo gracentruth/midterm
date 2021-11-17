@@ -8,6 +8,7 @@ dependencies:
   flutter:
     sdk: flutter
   intl: ^0.17.0-nullsafety.2
+  url_launcher: ^6.0.13
 
   cupertino_icons: ^1.0.3
   shrine_images: ^2.0.1

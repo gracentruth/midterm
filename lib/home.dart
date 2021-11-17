@@ -13,39 +13,45 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+
+const isSelected = <bool>[false, false];
 
 class HomePage extends StatelessWidget {
-  //const HomePage({Key? key}) : super(key: key);
-
   // TODO: Make a collection of cards (102)
   // TODO: Add a variable for Category (104)
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
      appBar:AppBar(
-       title: Center(
+       title: const Center(
          child: Text('    Main'),
        ),
        actions: <Widget>[
          IconButton(
            icon: Icon(Icons.search),
            onPressed: () {
-             print('search button is clicked ');
+            // print('search button is clicked ');
+             Navigator.pushNamed(context, '/search');
            },
          ),
          IconButton(
            icon: Icon(Icons.language),
-           onPressed: () {
-             print('search button is clicked ');
-           },
+           onPressed: ()async{
+             final url = 'http://www.handong.edu/';
+             if(await canLaunch(url)){
+              await launch(
+                url,
+                forceSafariVC: true,
+              );
+             }
+           }
          ),
-
        ],
      ) ,
       drawer: Drawer(
-
-
         child: ListView(
           padding: EdgeInsets.zero,
 
@@ -111,10 +117,32 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: Center(
-        child: Text('You did it!'),
+      body: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(250.0,20.0, 0.0, 0.0),
+
+            child:ToggleButtons(
+              color: Colors.black.withOpacity(0.60),
+              selectedColor: Color(0xFF6200EE),
+              selectedBorderColor: Color(0xFF6200EE),
+              fillColor: Color(0xFF6200EE).withOpacity(0.08),
+              splashColor: Color(0xFF6200EE).withOpacity(0.12),
+              hoverColor: Color(0xFF6200EE).withOpacity(0.04),
+              borderRadius: BorderRadius.circular(4.0),
+              isSelected: isSelected,
+              onPressed: (index) {
+                // Respond to button selection
+                  isSelected[index] = !isSelected[index];
+              },
+              children:const <Widget>[
+                Icon(Icons.list),
+                Icon(Icons.grid_view),
+              ],
+            ),
+          ),
+        ],
       ),
-      //resizeToAvoidBottomInset: false,
     );
   }
 }
