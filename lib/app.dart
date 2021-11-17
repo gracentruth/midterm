@@ -27,10 +27,11 @@ class ShrineApp extends StatelessWidget {
     return MaterialApp(
       title: 'Shrine',
 
-      home: const HomePage(),
+      home:  HomePage(),
       routes: {
         '/login': (context) => LoginPage(),
         '/second': (context) => SecondPage(),
+        '/main': (context) => HomePage(),
       },
 
       initialRoute: '/login',
