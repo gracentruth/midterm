@@ -1,49 +1,37 @@
-// Copyright 2018-present the Flutter authors. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
-const isSelected = <bool>[false, false];
 
 List<Map> list= [
-  {'title':'first','image':'assets/hotel1.png'},
-  {'title':'second','image':'assets/hotel2.png'},
-  {'title':'third','image':'assets/hotel3.png'},
-  {'title':'fourth','image':'assets/hotel4.png'},
-  {'title':'fifth','image':'assets/hotel5.png'},
-  {'title':'sixth','image':'assets/hotel6.png'},
+  {'title':'First Hotel','image':'assets/hotel1.png'},
+  {'title':'Second Hotel','image':'assets/hotel2.png'},
+  {'title':'Third Hotel','image':'assets/hotel3.png'},
+  {'title':'Fourth Hotel','image':'assets/hotel4.png'},
+  {'title':'Fifth Hotel','image':'assets/hotel5.png'},
+  {'title':'Sixth Hotel','image':'assets/hotel6.png'},
 
 ];
 
-// {
-//   'image':'assets/diamond.png',
-//   'title':'first hotel'
-// };
+int viewCount=2;
 
+class HomePage extends StatefulWidget {
 
+  @override
+  State<StatefulWidget> createState(){
+    return HomePageState();
+  }
+}
 
-class HomePage extends StatelessWidget {
-
-
+class HomePageState extends State<HomePage>{
+  List<bool> isSelected = <bool>[false, false];
   // TODO: Add a variable for Category (104)
   @override
   Widget build(BuildContext context) {
     //print(file[0]['image']);
     return Scaffold(
+      //resizeToAvoidBottomInset : false,
      appBar:AppBar(
        title: const Center(
          child: Text('    Main'),
@@ -99,7 +87,6 @@ class HomePage extends StatelessWidget {
                 //print('home is clicked');
                 Navigator.pushNamed(context, '/main');
               },
-
             ),
             ListTile(
               leading: Icon(
@@ -152,7 +139,10 @@ class HomePage extends StatelessWidget {
               isSelected: isSelected,
               onPressed: (index) {
                 // Respond to button selection
-                  isSelected[index] = !isSelected[index];
+              setState(() {
+                  viewCount=index+1;
+                  print(viewCount);
+              });
               },
               children:const <Widget>[
                 Icon(Icons.list),
@@ -160,16 +150,26 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-         GridViewPage()
-
-
-
+         View()
         ],
 
       ),
     );
   }
 }
+
+class View extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    if(viewCount==2){
+      return GridViewPage();
+    }
+    else {
+      return ListViewPage();
+    }
+  }
+}
+
 
 class GridViewPage extends StatelessWidget {
   List<Card> _buildGridCards(int count) {
@@ -180,19 +180,70 @@ class GridViewPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            AspectRatio(
-              aspectRatio: 18.0 / 11.0,
-              child: Image.asset(list[index]['image'],
-              fit:BoxFit.cover),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: AspectRatio(
+                aspectRatio: 18.0 / 11.0,
+                child: Image.asset(list[index]['image'],
+                    fit:BoxFit.cover),
+              ),
+
             ),
+
             Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+              padding: const EdgeInsets.fromLTRB(10.0,0.0,0.0,3.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('$index'),
-                  const SizedBox(height: 8.0),
-                  Text(list[index]['title']),
+
+                  Row(
+                    children: [
+                      SizedBox(width:20.0),
+                      Icon(Icons.star,
+                        color:Colors.yellowAccent,
+                      ),
+                      Icon(Icons.star,
+                        color:Colors.yellowAccent,
+                      ),
+                      Icon(Icons.star,
+                        color:Colors.yellowAccent,
+                      )
+                    ],
+
+                  ),
+                  const SizedBox(height: 3.0),
+                  Row(
+                    children: [
+                      SizedBox(width:22.0),
+                      Text(list[index]['title'],
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w800,
+                        ),),
+
+                    ],
+                  ),
+
+                  const SizedBox(height:0.0),
+                  Row(
+                    children:[
+                      const Icon(Icons.location_on,
+                        color:Colors.lightBlueAccent,
+                      ),
+                      Text(list[index]['title']),
+                    ]
+                  ),
+                  Row(
+                    children:[
+                      SizedBox(width:80.0),
+                      TextButton(onPressed: (){
+
+                      },
+                          child:const Text(
+                            'more'
+                          ))
+                    ]
+                  )
+
                 ],
               ),
             ),
@@ -206,13 +257,13 @@ class GridViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Expanded(
       child: GridView.count(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           crossAxisCount: 2,//1개 행에 보여줄 아이템 개수
-          padding: const EdgeInsets.all(16.0),
-          // childAspectRatio: 9.0 / 9.0, // 아이템의 가로세로 비율
+          padding: const EdgeInsets.all(10.0),
+          childAspectRatio: 10.0 / 13.0, // 아이템의 가로세로 비율
           // TODO: Build a grid of cards (102)
           children: _buildGridCards(6) //아이템의 반복문 항목 형성
       ),
@@ -223,7 +274,7 @@ class GridViewPage extends StatelessWidget {
 
 
 class ListViewPage extends StatelessWidget {
-  List<Card> _buildGridCards(int count) {
+  List<Card> _buildListCards(int count) {
     List<Card> cards = List.generate(
       count,
           (int index) => Card(
@@ -231,25 +282,20 @@ class ListViewPage extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            AspectRatio(
-              aspectRatio: 8.0 / 8.0,
-              child: Container(
-                padding: const EdgeInsets.all(0.0),
-
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.red,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(20))
-                  ),
+            Container(
+              padding: EdgeInsets.all(10),
+              child:ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child:AspectRatio(
+                  aspectRatio:11.0 / 11.0,
                   child: Image.asset(list[index]['image'],
-                  fit:BoxFit.fill,
-
-                  ),
+                      fit:BoxFit.cover),
                 ),
               ),
+
             ),
+
+
             Padding(
               padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
               child: Column(
@@ -271,15 +317,17 @@ class ListViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Expanded(
+
       child: GridView.count(
           scrollDirection: Axis.vertical,
+
           shrinkWrap: true,
           crossAxisCount: 1,//1개 행에 보여줄 아이템 개수
           padding: const EdgeInsets.all(16.0),
           childAspectRatio: 6.0 / 2.0, // 아이템의 가로세로 비율
           // TODO: Build a grid of cards (102)
-          children: _buildGridCards(4) //아이템의 반복문 항목 형성
+          children: _buildListCards(6) //아이템의 반복문 항목 형성
       ),
 
     );
