@@ -126,7 +126,8 @@ class HomePageState extends State<HomePage>{
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(250.0,20.0, 0.0, 0.0),
+            padding: EdgeInsets.all(10.0),
+            alignment: Alignment(0.9, 0.0),
 
             child:ToggleButtons(
               color: Colors.black.withOpacity(0.60),
@@ -141,7 +142,6 @@ class HomePageState extends State<HomePage>{
                 // Respond to button selection
               setState(() {
                   viewCount=index+1;
-                  print(viewCount);
               });
               },
               children:const <Widget>[
@@ -232,16 +232,16 @@ class GridViewPage extends StatelessWidget {
                       Text(list[index]['title']),
                     ]
                   ),
-                  Row(
-                    children:[
-                      SizedBox(width:80.0),
-                      TextButton(onPressed: (){
+                  Container(
+                      alignment: Alignment(0.9, 0.0),
+
+                     child: TextButton(onPressed: (){
 
                       },
                           child:const Text(
                             'more'
                           ))
-                    ]
+
                   )
 
                 ],
@@ -258,17 +258,34 @@ class GridViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: GridView.count(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          crossAxisCount: 2,//1개 행에 보여줄 아이템 개수
-          padding: const EdgeInsets.all(10.0),
-          childAspectRatio: 10.0 / 13.0, // 아이템의 가로세로 비율
-          // TODO: Build a grid of cards (102)
-          children: _buildGridCards(6) //아이템의 반복문 항목 형성
-      ),
+       child: OrientationBuilder(
+            builder:(context,orientation){
+              return GridView.count(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
+                  padding: const EdgeInsets.fromLTRB(3.0, 0.0, 3.0, 3.0),
+                  childAspectRatio:orientation == Orientation.portrait ?  10.0 / 13.0 :10.0 / 11.0, // 아이템의 가로세로 비율
+                  // TODO: Build a grid of cards (102)
+                  children: _buildGridCards(6) //아이템의 반복문 항목 형성
+              );
+
+            }
+        ),
 
     );
+    //   Expanded(
+    //   child: GridView.count(
+    //       scrollDirection: Axis.vertical,
+    //       shrinkWrap: true,
+    //       crossAxisCount: 2,//1개 행에 보여줄 아이템 개수
+    //       padding: const EdgeInsets.all(10.0),
+    //       childAspectRatio: 10.0 / 13.0, // 아이템의 가로세로 비율
+    //       // TODO: Build a grid of cards (102)
+    //       children: _buildGridCards(6) //아이템의 반복문 항목 형성
+    //   ),
+    //
+    // );
   }
 }
 
@@ -283,7 +300,7 @@ class ListViewPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(20.0),
               child:ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child:AspectRatio(
@@ -297,13 +314,46 @@ class ListViewPage extends StatelessWidget {
 
 
             Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+              padding: const EdgeInsets.fromLTRB(16.0,3.0, 16.0, 0.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('$index'),
-                  const SizedBox(height: 8.0),
-                  Text(list[index]['title']),
+                  const SizedBox(height: 15.0),
+                  Row(
+                    children: const [
+                      Icon(Icons.star,
+                        color:Colors.yellowAccent,
+                      ),
+                      Icon(Icons.star,
+                        color:Colors.yellowAccent,
+                      ),
+                      Icon(Icons.star,
+                        color:Colors.yellowAccent,
+                      )
+                    ],
+                  ),
+                  Text(list[index]['title'],
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w800,
+                    ),),
+                  const SizedBox(height: 3.0),
+
+                  Row(
+                      children:[
+                        SizedBox(
+                           child:Text(list[index]['title']),
+                          width: 60,
+                        ),
+
+                      const SizedBox(width:58),
+                        TextButton(onPressed: (){
+
+                        },
+                            child:const Text(
+                                'more'
+                            ))
+                      ]
+                  )
                 ],
               ),
             ),
@@ -325,7 +375,7 @@ class ListViewPage extends StatelessWidget {
           shrinkWrap: true,
           crossAxisCount: 1,//1개 행에 보여줄 아이템 개수
           padding: const EdgeInsets.all(16.0),
-          childAspectRatio: 6.0 / 2.0, // 아이템의 가로세로 비율
+          childAspectRatio: 8.0 / 3.0, // 아이템의 가로세로 비율
           // TODO: Build a grid of cards (102)
           children: _buildListCards(6) //아이템의 반복문 항목 형성
       ),
