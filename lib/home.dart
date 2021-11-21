@@ -29,7 +29,6 @@ class HomePageState extends State<HomePage>{
   // TODO: Add a variable for Category (104)
   @override
   Widget build(BuildContext context) {
-    //print(file[0]['image']);
     return Scaffold(
       //resizeToAvoidBottomInset : false,
      appBar:AppBar(
@@ -161,6 +160,7 @@ class HomePageState extends State<HomePage>{
 class View extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     if(viewCount==2){
       return GridViewPage();
     }
@@ -172,7 +172,7 @@ class View extends StatelessWidget {
 
 
 class GridViewPage extends StatelessWidget {
-  List<Card> _buildGridCards(int count) {
+  List<Card> _buildGridCards(int count,context) {
     List<Card> cards = List.generate(
       count,
           (int index) => Card(
@@ -184,7 +184,8 @@ class GridViewPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
               child: AspectRatio(
                 aspectRatio: 18.0 / 11.0,
-                child: Image.asset(list[index]['image'],
+                child:
+                Image.asset(list[index]['image'],
                     fit:BoxFit.cover),
               ),
 
@@ -237,6 +238,7 @@ class GridViewPage extends StatelessWidget {
 
                      child: TextButton(onPressed: (){
 
+                       Navigator.pushNamed(context,'/detail');
                       },
                           child:const Text(
                             'more'
@@ -251,7 +253,6 @@ class GridViewPage extends StatelessWidget {
         ),
       ),
     );
-
     return cards;
   }
 
@@ -267,31 +268,19 @@ class GridViewPage extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(3.0, 0.0, 3.0, 3.0),
                   childAspectRatio:orientation == Orientation.portrait ?  10.0 / 13.0 :10.0 / 11.0, // 아이템의 가로세로 비율
                   // TODO: Build a grid of cards (102)
-                  children: _buildGridCards(6) //아이템의 반복문 항목 형성
+                  children: _buildGridCards(6,context) //아이템의 반복문 항목 형성
               );
 
             }
         ),
 
     );
-    //   Expanded(
-    //   child: GridView.count(
-    //       scrollDirection: Axis.vertical,
-    //       shrinkWrap: true,
-    //       crossAxisCount: 2,//1개 행에 보여줄 아이템 개수
-    //       padding: const EdgeInsets.all(10.0),
-    //       childAspectRatio: 10.0 / 13.0, // 아이템의 가로세로 비율
-    //       // TODO: Build a grid of cards (102)
-    //       children: _buildGridCards(6) //아이템의 반복문 항목 형성
-    //   ),
-    //
-    // );
   }
 }
 
 
 class ListViewPage extends StatelessWidget {
-  List<Card> _buildListCards(int count) {
+  List<Card> _buildListCards(int count,context) {
     List<Card> cards = List.generate(
       count,
           (int index) => Card(
@@ -347,6 +336,7 @@ class ListViewPage extends StatelessWidget {
 
                       const SizedBox(width:58),
                         TextButton(onPressed: (){
+                          Navigator.pushNamed(context,'/detail');
 
                         },
                             child:const Text(
@@ -377,7 +367,7 @@ class ListViewPage extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           childAspectRatio: 8.0 / 3.0, // 아이템의 가로세로 비율
           // TODO: Build a grid of cards (102)
-          children: _buildListCards(6) //아이템의 반복문 항목 형성
+          children: _buildListCards(6,context) //아이템의 반복문 항목 형성
       ),
 
     );

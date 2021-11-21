@@ -18,7 +18,7 @@ import 'home.dart';
 import 'login.dart';
 import 'second.dart';
 import 'search.dart';
-
+import 'detail.dart';
 // TODO: Convert ShrineApp to stateful widget (104)
 class ShrineApp extends StatelessWidget {
   const ShrineApp({Key? key}) : super(key: key);
@@ -34,6 +34,7 @@ class ShrineApp extends StatelessWidget {
         '/second': (context) => SecondPage(),
         '/main': (context) => HomePage(),
         '/search':(context) => SearchPage(),
+        '/detail':(context)=>DetailPage(),
       },
 
       initialRoute: '/login',
