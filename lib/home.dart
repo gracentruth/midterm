@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'app.dart';
 
 
 List<Map> list= [
@@ -11,8 +11,9 @@ List<Map> list= [
   {'title':'Fourth Hotel','image':'assets/hotel4.png'},
   {'title':'Fifth Hotel','image':'assets/hotel5.png'},
   {'title':'Sixth Hotel','image':'assets/hotel6.png'},
-
 ];
+
+
 
 int viewCount=2;
 
@@ -27,6 +28,7 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage>{
   List<bool> isSelected = <bool>[false, false];
   // TODO: Add a variable for Category (104)
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,7 +106,8 @@ class HomePageState extends State<HomePage>{
               ),
               title: Text('Favorite Hotel'),
               onTap: () {
-                print('Q&A is clicked');
+
+                Navigator.pushNamed(context, '/fav');
               },
 
             ),
@@ -115,7 +118,7 @@ class HomePageState extends State<HomePage>{
               ),
               title: Text('My Page'),
               onTap: () {
-                print('Q&A is clicked');
+
               },
 
             ),
@@ -127,7 +130,6 @@ class HomePageState extends State<HomePage>{
           Container(
             padding: EdgeInsets.all(10.0),
             alignment: Alignment(0.9, 0.0),
-
             child:ToggleButtons(
               color: Colors.black.withOpacity(0.60),
               selectedColor: Color(0xFF6200EE),
@@ -170,12 +172,11 @@ class View extends StatelessWidget {
   }
 }
 
-
 class GridViewPage extends StatelessWidget {
   List<Card> _buildGridCards(int count,context) {
     List<Card> cards = List.generate(
       count,
-          (int index) => Card(
+          (int i) => Card(
         clipBehavior: Clip.antiAlias,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,18 +186,15 @@ class GridViewPage extends StatelessWidget {
               child: AspectRatio(
                 aspectRatio: 18.0 / 11.0,
                 child:
-                Image.asset(list[index]['image'],
+                Image.asset(list[i]['image'],
                     fit:BoxFit.cover),
               ),
-
             ),
-
             Padding(
               padding: const EdgeInsets.fromLTRB(10.0,0.0,0.0,3.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-
                   Row(
                     children: [
                       SizedBox(width:20.0),
@@ -210,42 +208,38 @@ class GridViewPage extends StatelessWidget {
                         color:Colors.yellowAccent,
                       )
                     ],
-
                   ),
                   const SizedBox(height: 3.0),
                   Row(
                     children: [
                       SizedBox(width:22.0),
-                      Text(list[index]['title'],
+                      Text(list[i]['title'],
                         style: const TextStyle(
                           fontWeight: FontWeight.w800,
                         ),),
 
                     ],
                   ),
-
                   const SizedBox(height:0.0),
                   Row(
                     children:[
                       const Icon(Icons.location_on,
                         color:Colors.lightBlueAccent,
                       ),
-                      Text(list[index]['title']),
+                      Text(list[i]['title']),
                     ]
                   ),
                   Container(
                       alignment: Alignment(0.9, 0.0),
-
                      child: TextButton(onPressed: (){
-
-                       Navigator.pushNamed(context,'/detail');
+                       Navigator.pushNamed(context,'/detail',
+                         arguments: PassArgs(index:i),
+                       );
                       },
                           child:const Text(
                             'more'
                           ))
-
                   )
-
                 ],
               ),
             ),
@@ -270,7 +264,6 @@ class GridViewPage extends StatelessWidget {
                   // TODO: Build a grid of cards (102)
                   children: _buildGridCards(6,context) //아이템의 반복문 항목 형성
               );
-
             }
         ),
 
@@ -283,7 +276,7 @@ class ListViewPage extends StatelessWidget {
   List<Card> _buildListCards(int count,context) {
     List<Card> cards = List.generate(
       count,
-          (int index) => Card(
+          (int i) => Card(
         clipBehavior: Clip.antiAlias,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -294,14 +287,12 @@ class ListViewPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
                 child:AspectRatio(
                   aspectRatio:11.0 / 11.0,
-                  child: Image.asset(list[index]['image'],
+                  child: Image.asset(list[i]['image'],
                       fit:BoxFit.cover),
                 ),
               ),
 
             ),
-
-
             Padding(
               padding: const EdgeInsets.fromLTRB(16.0,3.0, 16.0, 0.0),
               child: Column(
@@ -321,7 +312,7 @@ class ListViewPage extends StatelessWidget {
                       )
                     ],
                   ),
-                  Text(list[index]['title'],
+                  Text(list[i]['title'],
                     style: const TextStyle(
                       fontWeight: FontWeight.w800,
                     ),),
@@ -330,13 +321,15 @@ class ListViewPage extends StatelessWidget {
                   Row(
                       children:[
                         SizedBox(
-                           child:Text(list[index]['title']),
+                           child:Text(list[i]['title']),
                           width: 60,
                         ),
 
                       const SizedBox(width:58),
                         TextButton(onPressed: (){
-                          Navigator.pushNamed(context,'/detail');
+                          Navigator.pushNamed(context,'/detail',
+                            arguments: PassArgs(index:i),
+                          );
 
                         },
                             child:const Text(
@@ -373,3 +366,4 @@ class ListViewPage extends StatelessWidget {
     );
   }
 }
+

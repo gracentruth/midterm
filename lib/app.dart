@@ -18,8 +18,15 @@ import 'home.dart';
 import 'login.dart';
 import 'second.dart';
 import 'search.dart';
+import 'favorite.dart';
 import 'detail.dart';
 // TODO: Convert ShrineApp to stateful widget (104)
+
+class PassArgs{
+  PassArgs({required this.index});
+  final int index;
+}
+
 class ShrineApp extends StatelessWidget {
   const ShrineApp({Key? key}) : super(key: key);
 
@@ -35,6 +42,7 @@ class ShrineApp extends StatelessWidget {
         '/main': (context) => HomePage(),
         '/search':(context) => SearchPage(),
         '/detail':(context)=>DetailPage(),
+        '/fav':(context)=>FavoriteHotel(),
       },
 
       initialRoute: '/login',
