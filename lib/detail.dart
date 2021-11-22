@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'app.dart';
 import 'home.dart';
 
-bool select=false;
+
 List<bool> selected=[
   false,false,false,false,false,false
 ];
