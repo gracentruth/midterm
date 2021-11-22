@@ -50,7 +50,7 @@ class _DetailPageState extends State<DetailPage> {
              Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Align(
-                    child:Icon(Icons.favorite,
+                    child:Icon(selected[args.index]? Icons.favorite:null,
                       size: 40,
                       color: selected[args.index]? Colors.red:Colors.white,
 
