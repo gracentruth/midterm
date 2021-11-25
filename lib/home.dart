@@ -106,7 +106,6 @@ class HomePageState extends State<HomePage>{
               ),
               title: Text('Favorite Hotel'),
               onTap: () {
-
                 Navigator.pushNamed(context, '/fav');
               },
 
