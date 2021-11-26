@@ -39,34 +39,12 @@ class _FavoriteHotelState extends State<FavoriteHotel> {
       ),
     );
   }
-  Widget _buildRow(String title) {
-    //  final alreadySaved=_saved.contains(pair);
-    return ListTile(
-      title: Text(
-          title
-      ),
-      // trailing: Icon(   // NEW from here...
-      //   alreadySaved ? Icons.favorite : Icons.favorite_border,
-      //   color: alreadySaved ? Colors.red : null,
-      //   semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
-      // ),
-      onTap: () {      // NEW lines from here...
-        setState(() {
-          // if (alreadySaved) {
-          //   _saved.remove(pair);
-          // } else {
-          //   _saved.add(pair);
-          // }
-          print('hello');
-        });
-      },               // ... to here.
-    );
-  }
+
 
   Widget _buildSuggestions() {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
-        itemCount: 6,
+        itemCount: selected.length,
         itemBuilder: /*1*/ (context, i) {
           if(selected[i]==true) {
             return _buildRow(list[i]['title']);
@@ -74,6 +52,26 @@ class _FavoriteHotelState extends State<FavoriteHotel> {
             return Container(height:0.0);
           }
         });
+  }
+
+  Widget _buildRow(String title) {
+    //  final alreadySaved=_saved.contains(pair);
+    return ListTile(
+      title: Text(
+        title,
+        style: TextStyle(
+          fontWeight:FontWeight.w800,
+          fontSize: 18,
+        ),
+      ),
+
+      onTap: () {      // NEW lines from here...
+        setState(() {
+
+
+        });
+      },               // ... to here.
+    );
   }
 
   // void _pushSaved() {

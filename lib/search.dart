@@ -10,93 +10,18 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:AppBar(
-        title: Center(
-          child: Text('    Search'),
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+          onPressed: (){
+              Navigator.pop(context);
+          },
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              print('search button is clicked ');
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.language),
-            onPressed: () {
-              print('search button is clicked ');
-            },
-          ),
+        title:
+         Text('Search'),
 
-        ],
+
       ) ,
-      drawer: Drawer(
 
-
-        child: ListView(
-          padding: EdgeInsets.zero,
-
-          children: <Widget>[
-            const DrawerHeader(
-              padding: EdgeInsets.fromLTRB(30.0, 110.0, 0, 0),
-              child: Text('Pages',
-                style: TextStyle(
-                  color:Colors.white,
-                  fontSize: 30.0,
-
-                ),
-
-              ),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.home,
-                color: Colors.blue,
-              ),
-              title: Text('Home'),
-              onTap: () {
-                //print('home is clicked');
-                Navigator.pushNamed(context, '/main');
-              },
-
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.search,
-                color: Colors.blue,
-              ),
-              title: Text('Search'),
-              onTap: () {
-                print('setting is clicked');
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.location_city,
-                color: Colors.blue,
-              ),
-              title: Text('Favorite Hotel'),
-              onTap: () {
-                print('Q&A is clicked');
-              },
-
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.person,
-                color: Colors.blue,
-              ),
-              title: Text('My Page'),
-              onTap: () {
-                print('Q&A is clicked');
-              },
-
-            ),
-          ],
-        ),
-      ),
       body: Center(
         child: Text('You did it!'),
       ),

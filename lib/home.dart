@@ -97,6 +97,7 @@ class HomePageState extends State<HomePage>{
               title: Text('Search'),
               onTap: () {
                 print('setting is clicked');
+                Navigator.pushNamed(context, '/search');
               },
             ),
             ListTile(
@@ -117,7 +118,7 @@ class HomePageState extends State<HomePage>{
               ),
               title: Text('My Page'),
               onTap: () {
-
+                Navigator.pushNamed(context, '/my');
               },
 
             ),

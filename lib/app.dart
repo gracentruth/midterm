@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:shrine/mypage.dart';
 
 import 'home.dart';
 import 'login.dart';
@@ -20,6 +21,7 @@ import 'second.dart';
 import 'search.dart';
 import 'favorite.dart';
 import 'detail.dart';
+import 'mypage.dart';
 // TODO: Convert ShrineApp to stateful widget (104)
 
 class PassArgs{
@@ -43,6 +45,7 @@ class ShrineApp extends StatelessWidget {
         '/search':(context) => SearchPage(),
         '/detail':(context)=>DetailPage(),
         '/fav':(context)=>FavoriteHotel(),
+        '/my':(context)=>MyPage(),
       },
 
       initialRoute: '/login',

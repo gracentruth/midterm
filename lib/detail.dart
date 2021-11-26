@@ -25,10 +25,7 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-
     final args= ModalRoute.of(context)!.settings.arguments as PassArgs;
-
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Detail'),
@@ -42,7 +39,6 @@ class _DetailPageState extends State<DetailPage> {
                onDoubleTap: (){
                   setState(() {
                   selected[args.index]=!selected[args.index];
-
                  });
                   },),
 
