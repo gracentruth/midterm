@@ -21,7 +21,7 @@ class  DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
 
-  //const DetailPage({Key? key}) : super(key: key);ㅐ
+  //const DetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
