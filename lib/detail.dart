@@ -41,8 +41,6 @@ class _DetailPageState extends State<DetailPage> {
                   selected[args.index]=!selected[args.index];
                  });
                   },),
-
-
              Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Align(
